@@ -5,22 +5,24 @@ public class Movie {
     private String director;
     private int year;
     private boolean IsInColor;
+    private double lenghtinMin;
     private String genre;
 
 
 
     // method / parametre
-    public Movie(String tilte, String director, int year, boolean IsInColor, String genre) {
+    public Movie(String tilte, String director, int year, boolean IsInColor, double lenghtinMin, String genre) {
         this.tilte = tilte;
         this.director = director;
         this.year = year;
         this.IsInColor = IsInColor;
+        this.lenghtinMin = lenghtinMin;
         this.genre = genre;
     }
 
     // GetterMethods
 
-    public static String getTilte() {
+    public String getTilte() {
         return tilte;
     }
 
@@ -35,6 +37,11 @@ public class Movie {
     public boolean getIsInColor() {
         return IsInColor;
     }
+
+    public double getLenghtinMin() {
+        return lenghtinMin;
+    }
+
 
     public String getGenre() {
         return genre;
