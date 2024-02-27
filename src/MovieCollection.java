@@ -13,30 +13,52 @@ public class MovieCollection {
 
     }
 
-    /*public void getMovieCollection() {
-        for (Movie i : movieCollection) {
-            System.out.println(i.getTilte());
+    public String searchMovieCollection(String tilte) {
+        String result = "";
+               for (Movie movie : movieCollection) {
+                   if(movie.getTilte().toLowerCase().contains(tilte.toLowerCase())){
+                       result += movie.toString() + "\n";
+                   } else {
+                    return "No movie by title " + tilte + " found.";
+                   }
+        } if (!result.isEmpty()) {
+            return result;
+        } else {
+                   return "You haven't added any movies to your collection";
         }
-    }*/
+    }
 
     public void getMovietitles () {
-        for (int i = 0; i < movieCollection.size(); i++){
+        for (int i = 0; i <= movieCollection.size() - 1; i++){
             System.out.println(movieCollection.get(i).getTilte()); // du skal vælge det indeks du skal vælge
         }
     }
 
-    public void removeMovie(String remove){
-        int i = movieCollection.indexOf(remove) + 1;
-        movieCollection.remove(i);
+    public void removeMovie(String MovieNameToRemove){
+        for (int i = 0; i <= movieCollection.size() -1; i++ ) {
+            System.out.println("Movie " + movieCollection.get(i).getTilte() + " is index of " + i);
+            if (MovieNameToRemove.equals(movieCollection.get(i).getTilte())){
+                movieCollection.remove(i);
+            }
+        }
     }
 
-    //public void changeMovie();
+    public void listsize() {
+        System.out.println(movieCollection.size());
+    }
+
+    public void movieObjectindex() {
+        for (int i = 0; i <= movieCollection.size() -1; i++ ){
+            System.out.println("Movie "+ movieCollection.get(i).getTilte() + " is index of " + i);
+        }
+    }
+
 
 }
 
 
 
-
+//public void changeMovie();
 
 //for (Movie movieCollection : MovieCollection){
 //        MovieCollection.getTitle();

@@ -46,4 +46,16 @@ public class Movie {
     public String getGenre() {
         return genre;
     }
+
+    @Override
+        public String toString() {
+            return "Title: " + tilte +
+                    ", Director: " + director +
+                    ", year: " + year +
+                    ", IsInColor: " + (IsInColor ? "Yes" : "No") +  //ternary operator til if-else statement.
+                    ", lenghtinMin: " + lenghtinMin +
+                    ", genre: " + genre;
+    }
+
+
 }
