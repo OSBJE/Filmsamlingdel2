@@ -2,42 +2,45 @@ import java.util.ArrayList;
 
 public class MovieCollection {
 
-    private ArrayList<Movie> movieCollection;
+    private final ArrayList<Movie> movieCollection;
 
     public MovieCollection() {
         this.movieCollection = new ArrayList<>();
     }
 
-    public void tilFøjMovie(String tilte, String director, int year, boolean IsInColor, double lenghtinMin, String genre) {
-        movieCollection.add(new Movie(tilte, director, year, IsInColor, lenghtinMin, genre));
+    public void tilFøjMovie(String title, String director, int year, boolean IsInColor, double lenghtinMin, String genre) {
+        movieCollection.add(new Movie(title, director, year, IsInColor, lenghtinMin, genre));
 
     }
 
-    public String searchMovieCollection(String tilte) {
+    public String searchMovieCollection(String title) {
         String result = "";
                for (Movie movie : movieCollection) {
-                   if(movie.getTilte().toLowerCase().contains(tilte.toLowerCase())){
+                   if(movie.getTitle().toLowerCase().contains(title.toLowerCase())){
                        result += movie.toString() + "\n";
                    } else {
-                    return "No movie by title " + tilte + " found.";
+                    System.out.println("No movie by title " + title + " found.");
+                    break;
                    }
         } if (!result.isEmpty()) {
-            return result;
+            System.out.println(result);
         } else {
-                   return "You haven't added any movies to your collection";
+                   System.out.println("You haven't added any movies to your collection");
         }
+               return result;
     }
+
 
     public void getMovietitles () {
         for (int i = 0; i <= movieCollection.size() - 1; i++){
-            System.out.println(movieCollection.get(i).getTilte()); // du skal vælge det indeks du skal vælge
+            System.out.println(movieCollection.get(i).toString()); // du skal vælge det indeks du skal vælge
         }
     }
 
     public void removeMovie(String MovieNameToRemove){
         for (int i = 0; i <= movieCollection.size() -1; i++ ) {
-            System.out.println("Movie " + movieCollection.get(i).getTilte() + " is index of " + i);
-            if (MovieNameToRemove.equals(movieCollection.get(i).getTilte())){
+            // System.out.println("Movie " + movieCollection.get(i).getTitle() + " is index of " + i);
+            if (MovieNameToRemove.equals(movieCollection.get(i).getTitle())){
                 movieCollection.remove(i);
             }
         }
@@ -49,7 +52,16 @@ public class MovieCollection {
 
     public void movieObjectindex() {
         for (int i = 0; i <= movieCollection.size() -1; i++ ){
-            System.out.println("Movie "+ movieCollection.get(i).getTilte() + " is index of " + i);
+            System.out.println("Movie "+ movieCollection.get(i).getTitle() + " is index of " + i);
+        }
+    }
+
+    public void updateMovie(String updateMovie) {
+        for (int i = 0; i <= movieCollection.size() -1; i++ ) {
+            if (updateMovie.equals(movieCollection.get(i).getTitle())){
+
+
+            }
         }
     }
 

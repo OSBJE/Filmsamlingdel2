@@ -9,12 +9,12 @@ public class Controller {
             this.movieCollection = new MovieCollection();
         }
 
-        public void tilFøjMovie(String tilte, String director, int year, boolean IsInColor, double lenghtinMin, String genre) {
-            movieCollection.tilFøjMovie(tilte, director, year, IsInColor, lenghtinMin, genre);
+        public void tilFøjMovie(String title, String director, int year, boolean IsInColor, double lenghtinMin, String genre) {
+            movieCollection.tilFøjMovie(title, director, year, IsInColor, lenghtinMin, genre);
         }
 
-        public String searchMovieCollection(String tilte){
-            return movieCollection.searchMovieCollection(tilte);
+        public String searchMovieCollection(String title){
+            return movieCollection.searchMovieCollection(title);
         }
 
         public void getMovietitles (){
