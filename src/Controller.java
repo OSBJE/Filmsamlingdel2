@@ -17,8 +17,8 @@ public class Controller {
             return movieCollection.searchMovieCollection(title);
         }
 
-        public void getMovietitles (){
-            movieCollection.getMovietitles();
+        public String getMovietitles (){
+            return movieCollection.getMovietitles();
         }
 
         public void removeMovie(String MovieNameToRemove){
@@ -33,6 +33,12 @@ public class Controller {
             movieCollection.movieObjectindex();
         }
 
+
+        //////// not working ////////
+
+        public void updateMovie() {
+            movieCollection.movieDirectorUpdate();
+        }
 
 }
 

@@ -31,11 +31,14 @@ public class MovieCollection {
     }
 
 
-    public void getMovietitles () {
+    public String getMovietitles () {
+        String list = "";
         for (int i = 0; i <= movieCollection.size() - 1; i++){
-            System.out.println(movieCollection.get(i).toString()); // du skal vælge det indeks du skal vælge
-        }
+            //System.out.println(movieCollection.get(i).toString()); // du skal vælge det indeks du skal vælge
+            list += movieCollection.get(i).toString();
+        } return list;
     }
+
 
     public void removeMovie(String MovieNameToRemove){
         for (int i = 0; i <= movieCollection.size() -1; i++ ) {
@@ -56,15 +59,26 @@ public class MovieCollection {
         }
     }
 
-    public void updateMovie(String updateMovie) {
+    ///////////////// working on updating different values in movies /////////////////////////////////
+
+    public int movieToUpdate(String updateMovie) {
+        int index = 0;
         for (int i = 0; i <= movieCollection.size() -1; i++ ) {
             if (updateMovie.equals(movieCollection.get(i).getTitle())){
-
-
+            index = i;
             }
-        }
+        } return index;
     }
 
+    public void movieDirectorUpdate() {
+        Movie object = movieCollection.get(movieToUpdate("DieHard"));
+        object.setDirector("Johnson");
+
+
+        //int index =  1 ;//movieToUpdate("DieHard");
+        //movieCollection.get(index).setDirector(DirectorUpdate); // = movieCollection.get(index).setDirector(DirectorUpdate);
+        //System.out.println("djasda" + movieCollection.get(index).getDirector());
+    }
 
 }
 
