@@ -15,35 +15,37 @@ public class MovieCollection {
 
     public String searchMovieCollection(String title) {
         String result = "";
-               for (Movie movie : movieCollection) {
-                   if(movie.getTitle().toLowerCase().contains(title.toLowerCase())){
-                       result += movie.toString() + "\n";
-                   } else {
-                    System.out.println("No movie by title " + title + " found.");
-                    break;
-                   }
-        } if (!result.isEmpty()) {
+        for (Movie movie : movieCollection) {
+            if (movie.getTitle().toLowerCase().contains(title.toLowerCase())) {
+                result += movie.toString() + "\n";
+            } else {
+                System.out.println("No movie by title " + title + " found.");
+                break;
+            }
+        }
+        if (!result.isEmpty()) {
             System.out.println(result);
         } else {
-                   System.out.println("You haven't added any movies to your collection");
+            System.out.println("You haven't added any movies to your collection");
         }
-               return result;
+        return result;
     }
 
 
-    public String getMovietitles () {
+    public String getMovietitles() {
         String list = "";
-        for (int i = 0; i <= movieCollection.size() - 1; i++){
+        for (int i = 0; i <= movieCollection.size() - 1; i++) {
             //System.out.println(movieCollection.get(i).toString()); // du skal vælge det indeks du skal vælge
             list += movieCollection.get(i).toString();
-        } return list;
+        }
+        return list;
     }
 
 
-    public void removeMovie(String MovieNameToRemove){
-        for (int i = 0; i <= movieCollection.size() -1; i++ ) {
+    public void removeMovie(String MovieNameToRemove) {
+        for (int i = 0; i <= movieCollection.size() - 1; i++) {
             // System.out.println("Movie " + movieCollection.get(i).getTitle() + " is index of " + i);
-            if (MovieNameToRemove.equals(movieCollection.get(i).getTitle())){
+            if (MovieNameToRemove.equals(movieCollection.get(i).getTitle())) {
                 movieCollection.remove(i);
             }
         }
@@ -54,8 +56,8 @@ public class MovieCollection {
     }
 
     public void movieObjectindex() {
-        for (int i = 0; i <= movieCollection.size() -1; i++ ){
-            System.out.println("Movie "+ movieCollection.get(i).getTitle() + " is index of " + i);
+        for (int i = 0; i <= movieCollection.size() - 1; i++) {
+            System.out.println("Movie " + movieCollection.get(i).getTitle() + " is index of " + i);
         }
     }
 
@@ -63,21 +65,65 @@ public class MovieCollection {
 
     public int movieToUpdate(String updateMovie) {
         int index = 0;
-        for (int i = 0; i <= movieCollection.size() -1; i++ ) {
-            if (updateMovie.equals(movieCollection.get(i).getTitle())){
-            index = i;
+        for (int i = 0; i <= movieCollection.size() - 1; i++) {
+            if (updateMovie.equals(movieCollection.get(i).getTitle())) {
+                index = i;
             }
-        } return index;
+        }
+        return index;
     }
 
-    public void movieDirectorUpdate() {
-        Movie object = movieCollection.get(movieToUpdate("DieHard"));
-        object.setDirector("Johnson");
+    public void attributeToUpdate(int attribute, String title, String value) {
+        // int att = attribute;
+        switch (attribute) {
+            case 1: // Director
+                movieValueUpdate(title, value);
+                break;
+            case 2: // year
+                movieValueUpdate(title, Integer.valueOf(value));
+                break;
+            case 3: // IsInColor
+                movieValueUpdate(title, Boolean.valueOf(value));
+                break;
+            case 4: // double
+                movieValueUpdate(title, Double.valueOf(value));
+                break;
+            case 5: // genre
+                movieValueGenre(title, value);
+                break;
+        }
+    }
 
+    /// Formler der opdateret værdier i mine objecter.
+
+    public void movieValueUpdate(String movieEdit, String updateValue) { // director
+        Movie object = movieCollection.get(movieToUpdate(movieEdit));
+        object.setDirector(updateValue);
 
         //int index =  1 ;//movieToUpdate("DieHard");
         //movieCollection.get(index).setDirector(DirectorUpdate); // = movieCollection.get(index).setDirector(DirectorUpdate);
         //System.out.println("djasda" + movieCollection.get(index).getDirector());
+    }
+
+    public void movieValueUpdate(String movieEdit, int updateValue) { // year
+        Movie object = movieCollection.get(movieToUpdate(movieEdit));
+        object.setYear(updateValue);
+    }
+
+    public void movieValueUpdate(String movieEdit, boolean updateValue) { // IsInColor
+        Movie object = movieCollection.get(movieToUpdate(movieEdit));
+        object.setIsInColor(updateValue);
+    }
+
+    public void movieValueUpdate(String movieEdit, double updateValue) { // LenghtInMin
+        Movie object = movieCollection.get(movieToUpdate(movieEdit));
+        object.setLenghtinMin(updateValue);
+    }
+
+
+    public void movieValueGenre(String movieEdit, String updateValue) { // LenghtInMin
+        Movie object = movieCollection.get(movieToUpdate(movieEdit));
+        object.setGenre(updateValue);
     }
 
 }

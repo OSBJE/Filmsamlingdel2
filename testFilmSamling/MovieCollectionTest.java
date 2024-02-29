@@ -72,8 +72,8 @@ class MovieCollectionTest {
     MovieCollection actualFilm = new MovieCollection();
 
     actualFilm.tilFøjMovie("DieHard","Lord Hard",2004, true, 20, "Action");
+    actualFilm.tilFøjMovie("Kitler","Hitler",1992, false, 32, "Drama"); // Man kan ikke bytte om på objecterne.
     actualFilm.tilFøjMovie("Lovepotion","Jacob Clienton",1992, false, 32, "Drama");
-    actualFilm.tilFøjMovie("Kitler","Hitler",1992, false, 32, "Drama");
 
 
             String currentMovies = film.getMovietitles();

@@ -33,11 +33,8 @@ public class Controller {
             movieCollection.movieObjectindex();
         }
 
-
-        //////// not working ////////
-
-        public void updateMovie() {
-            movieCollection.movieDirectorUpdate();
+        public void updateMovie(int attributeToUpdate, String movieEdit, String valueToUpdate) {
+            movieCollection.attributeToUpdate(attributeToUpdate, movieEdit, valueToUpdate);
         }
 
 }

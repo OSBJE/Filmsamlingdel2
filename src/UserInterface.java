@@ -90,7 +90,13 @@ public class UserInterface {
 
 
     public void updateMovie (){
-    film.updateMovie();
+        System.out.println("to edit the sub categories type: 1.Director 2.Year 3.Is in color 4.Length in min 5. Genre");
+        int attribute = input.nextInt();
+        System.out.println("Please type in the name of the movie you want to edit");
+        String movieEdit = input.next();
+        System.out.println("what do you want it to update to");
+        String updateValue = input.next();
+        film.updateMovie(attribute, movieEdit, updateValue);
     }
 
     // General methods return to start
