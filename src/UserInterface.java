@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
 public class UserInterface {
-    Scanner input = new Scanner(System.in);
-    // instance / lave et film object
-    // laver en ny film
 
+    ///********** Generate instance of Adventure Controler connect to game *************************///
+    Scanner input = new Scanner(System.in);
     Controller film = new Controller();
 
+    ///********** Game master this keeps game in a loop and calls methods *************************///
 
     public void startMenue(){
         int sentinal = 5;
@@ -25,7 +25,7 @@ public class UserInterface {
 
         if (userChoice == 1){
             addrandomMovies();
-            //OpretEnFilm();
+            // OpretEnFilm();
             returMenue();
         } else if (userChoice == 2){
             searchAmovie();
@@ -40,7 +40,20 @@ public class UserInterface {
     }
     }
 
-    // Methodes for our start menue
+    ///********** Helper metods and print out practical information  *******************************///
+
+    // --- Helper method to get to start --- //
+    public void returMenue() {
+        boolean brugervalg = true;
+        while (brugervalg) {
+            System.out.println("Do you want to return to main menue, type yes or false");
+            brugervalg = input.next().equalsIgnoreCase("yes");{
+                brugervalg = false;
+            }
+        }
+    }
+
+    ///********** Methods to generate film   ****************************************************///
 
     public void OpretEnFilm(){
 
@@ -67,6 +80,14 @@ public class UserInterface {
         }
     }
 
+    public void addrandomMovies(){
+        film.tilFøjMovie("DieHard","Lord Hard",2004, true, 20, "Action");
+        film.tilFøjMovie("Lovepotion","Jacob Clienton",1992, false, 32, "Drama");
+        film.tilFøjMovie("Kitler","Hitler",1992, false, 32, "Drama");
+    }
+
+    ///********** Methods to handle movies ****************************************************///
+
     public void searchAmovie(){
         System.out.println("please type it what movie you want to find");
         String userInput = input.next();
@@ -79,16 +100,6 @@ public class UserInterface {
         System.out.println(film2);
     }
 
-
-    public void addrandomMovies(){
-        film.tilFøjMovie("DieHard","Lord Hard",2004, true, 20, "Action");
-        film.tilFøjMovie("Lovepotion","Jacob Clienton",1992, false, 32, "Drama");
-        //film.tilFøjMovie("Kitler","Hitler",1992, false, 32, "Drama");
-    }
-
-    //////// not working ////////
-
-
     public void updateMovie (){
         System.out.println("to edit the sub categories type: 1.Director 2.Year 3.Is in color 4.Length in min 5. Genre");
         int attribute = input.nextInt();
@@ -98,18 +109,5 @@ public class UserInterface {
         String updateValue = input.next();
         film.updateMovie(attribute, movieEdit, updateValue);
     }
-
-    // General methods return to start
-
-    public void returMenue() {
-        boolean brugervalg = true;
-        while (brugervalg) {
-            System.out.println("Do you want to return to main menue, type yes or false");
-            brugervalg = input.next().equalsIgnoreCase("yes");{
-                brugervalg = false;
-            }
-        }
-    }
-
 
 }

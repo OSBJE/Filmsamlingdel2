@@ -25,14 +25,6 @@ public class Controller {
             movieCollection.removeMovie(MovieNameToRemove);
         }
 
-        public void listsize(){
-            movieCollection.listsize();
-        }
-
-        public void movieObjectindex() {
-            movieCollection.movieObjectindex();
-        }
-
         public void updateMovie(int attributeToUpdate, String movieEdit, String valueToUpdate) {
             movieCollection.attributeToUpdate(attributeToUpdate, movieEdit, valueToUpdate);
         }

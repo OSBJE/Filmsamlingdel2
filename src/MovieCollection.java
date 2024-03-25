@@ -2,17 +2,25 @@ import java.util.ArrayList;
 
 public class MovieCollection {
 
+    //****************** ATTRIBUTES **************************************************//
     private final ArrayList<Movie> movieCollection;
 
+    // ***************** Constructor *********************************************** ///
     public MovieCollection() {
         this.movieCollection = new ArrayList<>();
     }
 
+
+    /// ************************* Setter methods **********************************////
+
+    // --- Helper method new object --- //
     public void tilFøjMovie(String title, String director, int year, boolean IsInColor, double lenghtinMin, String genre) {
         movieCollection.add(new Movie(title, director, year, IsInColor, lenghtinMin, genre));
 
     }
 
+
+    /// *********************** Movie collection navigation **********************************////
     public String searchMovieCollection(String title) {
         String result = "";
         for (Movie movie : movieCollection) {
@@ -29,8 +37,7 @@ public class MovieCollection {
             System.out.println("You haven't added any movies to your collection");
         }
         return result;
-    }
-
+    } // ---> bad design pattern system.out.printLN
 
     public String getMovietitles() {
         String list = "";
@@ -41,38 +48,18 @@ public class MovieCollection {
         return list;
     }
 
-
     public void removeMovie(String MovieNameToRemove) {
         for (int i = 0; i <= movieCollection.size() - 1; i++) {
-            // System.out.println("Movie " + movieCollection.get(i).getTitle() + " is index of " + i);
             if (MovieNameToRemove.equals(movieCollection.get(i).getTitle())) {
                 movieCollection.remove(i);
             }
         }
     }
 
-    public void listsize() {
-        System.out.println(movieCollection.size());
-    }
 
-    public void movieObjectindex() {
-        for (int i = 0; i <= movieCollection.size() - 1; i++) {
-            System.out.println("Movie " + movieCollection.get(i).getTitle() + " is index of " + i);
-        }
-    }
+    /// *********************** Movie collection update / delete movie **********************************////
 
-    ///////////////// working on updating different values in movies /////////////////////////////////
-
-    public int movieToUpdate(String updateMovie) {
-        int index = 0;
-        for (int i = 0; i <= movieCollection.size() - 1; i++) {
-            if (updateMovie.equals(movieCollection.get(i).getTitle())) {
-                index = i;
-            }
-        }
-        return index;
-    }
-
+    // --- helper Switch to overload what value to update in --- //
     public void attributeToUpdate(int attribute, String title, String value) {
         // int att = attribute;
         switch (attribute) {
@@ -85,7 +72,7 @@ public class MovieCollection {
             case 3: // IsInColor
                 movieValueUpdate(title, Boolean.valueOf(value));
                 break;
-            case 4: // double
+            case 4: // Length
                 movieValueUpdate(title, Double.valueOf(value));
                 break;
             case 5: // genre
@@ -94,15 +81,21 @@ public class MovieCollection {
         }
     }
 
-    /// Formler der opdateret værdier i mine objecter.
+    // --- Helper method to get index of movie to update --- //
+    public int movieToUpdate(String updateMovie) {
+        int index = 0;
+        for (int i = 0; i <= movieCollection.size() - 1; i++) {
+            if (updateMovie.equals(movieCollection.get(i).getTitle())) {
+                index = i;
+            }
+        }
+        return index;
+    }
 
+    // --- Helper method with overload function --- //
     public void movieValueUpdate(String movieEdit, String updateValue) { // director
         Movie object = movieCollection.get(movieToUpdate(movieEdit));
         object.setDirector(updateValue);
-
-        //int index =  1 ;//movieToUpdate("DieHard");
-        //movieCollection.get(index).setDirector(DirectorUpdate); // = movieCollection.get(index).setDirector(DirectorUpdate);
-        //System.out.println("djasda" + movieCollection.get(index).getDirector());
     }
 
     public void movieValueUpdate(String movieEdit, int updateValue) { // year
@@ -120,31 +113,10 @@ public class MovieCollection {
         object.setLenghtinMin(updateValue);
     }
 
-
-    public void movieValueGenre(String movieEdit, String updateValue) { // LenghtInMin
+    public void movieValueGenre(String movieEdit, String updateValue) { // Genre
         Movie object = movieCollection.get(movieToUpdate(movieEdit));
         object.setGenre(updateValue);
     }
 
 }
 
-
-
-//public void changeMovie();
-
-//for (Movie movieCollection : MovieCollection){
-//        MovieCollection.getTitle();
-
-//for (int i = 0; i <MovieCollection.length()-1; i++){
-//    System.out.println(Movie.getTilte());
-
-/*    public String filmIdatabase() {
-        for ( int i = 0; i >= count; i++){
-            System.out.println();
-
-        }
-
-        for (Movie i : MovieCollection) {
-            System.out.println(i.getTilte());
-        }
-    }*/

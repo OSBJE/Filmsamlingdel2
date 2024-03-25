@@ -1,6 +1,6 @@
 public class Movie {
 
-    //Attributter
+    //****************** ATTRIBUTES **************************************************//
     private String title;
     private String director;
     private int year;
@@ -10,7 +10,7 @@ public class Movie {
 
 
 
-    // method / parametre
+    // ***************** Constructor *********************************************** ///
     public Movie(String title, String director, int year, boolean IsInColor, double lenghtinMin, String genre) {
         this.title = title;
         this.director = director;
@@ -20,7 +20,7 @@ public class Movie {
         this.genre = genre;
     }
 
-    // GetterMethods
+    /// ************************* Getter methods **********************************////
 
     public String getTitle() {
         return title;
@@ -42,13 +42,11 @@ public class Movie {
         return lenghtinMin;
     }
 
-
     public String getGenre() {
         return genre;
     }
 
-    // Setter methods;
-
+/// ************************* Setter methods **********************************////
 
     public void setTitle(String setTitle) {
         this.title = setTitle;
@@ -70,12 +68,11 @@ public class Movie {
         this.lenghtinMin = setLenghtinMin;
     }
 
-
     public void setGenre(String setGenre) {
         this.genre = setGenre;
     }
 
-
+    // -- Helper methods to get string output -- //
     @Override
         public String toString() {
             return "\n" + "Title: " + title +
@@ -83,7 +80,7 @@ public class Movie {
                     "\n" + "year: " + year +
                     "\n" + "IsInColor: " + (IsInColor ? "Yes" : "No") +  //ternary operator til if-else statement.
                     "\n" + "lenghtinMin: " + lenghtinMin +
-                    "\n" + "genre: " + genre;
+                    "\n" + "genre: " + genre +"\n";
     }
 
 
