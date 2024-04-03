@@ -1,3 +1,6 @@
+package ui;
+import domain_model.*;
+
 import java.util.Scanner;
 
 public class UserInterface {
@@ -5,6 +8,7 @@ public class UserInterface {
     ///********** Generate instance of Adventure Controler connect to game *************************///
     Scanner input = new Scanner(System.in);
     Controller film = new Controller();
+
 
     ///********** Game master this keeps game in a loop and calls methods *************************///
 
@@ -17,7 +21,7 @@ public class UserInterface {
         System.out.println("Velkommen til min filmsamling!");
         System.out.println(" 1. Opret en film");
         System.out.println(" 2. search for movie");
-        System.out.println(" 3. Show Movie Collection");
+        System.out.println(" 3. Movie Collection");
         System.out.println(" 4. update Movie");
         System.out.println(" 5 end program");
 
@@ -25,7 +29,7 @@ public class UserInterface {
 
         if (userChoice == 1){
             addrandomMovies();
-            // OpretEnFilm();
+            OpretEnFilm();
             returMenue();
         } else if (userChoice == 2){
             searchAmovie();
@@ -37,6 +41,7 @@ public class UserInterface {
             updateMovie();
             returMenue();
         }
+
     }
     }
 
@@ -73,7 +78,7 @@ public class UserInterface {
             System.out.println("what genre is it ?");
             String genre = input.next();
             film.tilFøjMovie(title, director, year, IsInColor, LenghtinMin, genre);
-            System.out.println("Movie was added to libary");
+            System.out.println("domain_model.Movie was added to libary");
             System.out.println("want to add another type true, else false");
             boolean dummyVarUpdate = input.nextBoolean();
             dummyVar = dummyVarUpdate;
@@ -109,5 +114,8 @@ public class UserInterface {
         String updateValue = input.next();
         film.updateMovie(attribute, movieEdit, updateValue);
     }
+
+
+    //****************** testing ************************************* //
 
 }

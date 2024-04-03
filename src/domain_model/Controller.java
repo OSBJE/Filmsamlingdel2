@@ -1,3 +1,6 @@
+package domain_model;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Controller {
@@ -5,7 +8,7 @@ public class Controller {
         private MovieCollection movieCollection;
 
 
-        public Controller() {
+        public Controller()  {
             this.movieCollection = new MovieCollection();
         }
 
@@ -28,6 +31,8 @@ public class Controller {
         public void updateMovie(int attributeToUpdate, String movieEdit, String valueToUpdate) {
             movieCollection.attributeToUpdate(attributeToUpdate, movieEdit, valueToUpdate);
         }
+
+        //****************** testing ************************************* //
 
 }
 
