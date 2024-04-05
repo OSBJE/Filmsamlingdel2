@@ -24,8 +24,8 @@ public class Controller {
             return movieCollection.getMovietitles();
         }
 
-        public void removeMovie(String MovieNameToRemove){
-            movieCollection.removeMovie(MovieNameToRemove);
+        public String removeMovie(String MovieNameToRemove){
+            return movieCollection.removeMovie(MovieNameToRemove);
         }
 
         public void updateMovie(int attributeToUpdate, String movieEdit, String valueToUpdate) {

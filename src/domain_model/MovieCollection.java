@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class MovieCollection {
 
     //****************** ATTRIBUTES **************************************************//
-    private final ArrayList<Movie> movieCollection;
+    private ArrayList<Movie> movieCollection;
 
     // ***************** Constructor *********************************************** ///
     public MovieCollection() {
@@ -25,40 +25,66 @@ public class MovieCollection {
 
 
     /// *********************** Movie collection navigation **********************************////
-    public String searchMovieCollection(String title) {
+
+    public String searchMovieCollection (String title) {
         String result = "";
         for (Movie movie : movieCollection) {
             if (movie.getTitle().toLowerCase().contains(title.toLowerCase())) {
-                result += movie.toString() + "\n";
+                result += movie + "\n";
             } else {
-                System.out.println("No movie by title " + title + " found.");
-                break;
+                return "No movie by title " + title + " found.";
             }
-        }
-        if (!result.isEmpty()) {
-            System.out.println(result);
-        } else {
-            System.out.println("You haven't added any movies to your collection");
-        }
-        return result;
-    } // ---> bad design pattern system.out.printLN
+        } return result;
+    }
+
+
+//    //public String searchMovieCollection(String title) {
+//        String result = "";
+//        for (Movie movie : movieCollection) {
+//            if (movie.getTitle().toLowerCase().contains(title.toLowerCase())) {
+//                result += movie.toString() + "\n";
+//            } else {
+//                System.out.println("No movie by title " + title + " found.");
+//                break;
+//            }
+//        }
+//        if (!result.isEmpty()) {
+//            System.out.println(result);
+//        } else {
+//            System.out.println("You haven't added any movies to your collection");
+//        }
+//        return result;
+//    } // ---> bad design pattern system.out.printLN
 
     public String getMovietitles() {
         String list = "";
-        for (int i = 0; i <= movieCollection.size() - 1; i++) {
+        for (int i = 0; i <= movieCollection.size()-1 ; i++) {
             //System.out.println(movieCollection.get(i).toString()); // du skal vælge det indeks du skal vælge
             list += movieCollection.get(i).toString();
         }
         return list;
     }
 
-    public void removeMovie(String MovieNameToRemove) {
-        for (int i = 0; i <= movieCollection.size() - 1; i++) {
-            if (MovieNameToRemove.equals(movieCollection.get(i).getTitle())) {
-                movieCollection.remove(i);
+    public String removeMovie(String title) {
+        for (Movie movie : movieCollection) {
+            if (movie.getTitle().equalsIgnoreCase(title)) {
+                movieCollection.remove(movie);
+                return movie.getTitle() + " has been removed";
             }
-        }
+
+        } return "No movie by that title found";
     }
+
+
+//    public String removeMovie(String MovieNameToRemove) {
+//        for (int i = 0; i <= movieCollection.size()-1; i++) {
+//            if ((movieCollection.get(i).getTitle()).equalsIgnoreCase(MovieNameToRemove)) {
+//                movieCollection.remove(i);
+//            } else {
+//                return "No movie by that title found";
+//            }
+//        } return "Movie has been deleted";
+//    }
 
 
     /// *********************** Movie collection update / delete movie **********************************////
@@ -88,7 +114,7 @@ public class MovieCollection {
     // --- Helper method to get index of movie to update --- //
     public int movieToUpdate(String updateMovie) {
         int index = 0;
-        for (int i = 0; i <= movieCollection.size() - 1; i++) {
+        for (int i = 0; i <= movieCollection.size()-1; i++) {
             if (updateMovie.equals(movieCollection.get(i).getTitle())) {
                 index = i;
             }
@@ -121,6 +147,9 @@ public class MovieCollection {
         Movie object = movieCollection.get(movieToUpdate(movieEdit));
         object.setGenre(updateValue);
     }
+
+    //****************** testing ************************************* //
+
 
 }
 

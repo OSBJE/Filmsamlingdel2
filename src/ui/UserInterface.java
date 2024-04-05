@@ -1,6 +1,7 @@
 package ui;
 import domain_model.*;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -13,22 +14,25 @@ public class UserInterface {
     ///********** Game master this keeps game in a loop and calls methods *************************///
 
     public void startMenue(){
-        int sentinal = 5;
+        int sentinal = 6;
         int userChoice = 0;
-
+        //addrandomMovies();
         while (userChoice != sentinal) {
 
-        System.out.println("Velkommen til min filmsamling!");
-        System.out.println(" 1. Opret en film");
-        System.out.println(" 2. search for movie");
-        System.out.println(" 3. Movie Collection");
-        System.out.println(" 4. update Movie");
-        System.out.println(" 5 end program");
+        System.out.println("Welcome to my movie collection!");
 
-        userChoice = input.nextInt();
+        System.out.println(" ---- 1. Add a movie");
+        System.out.println(" ---- 2. Search for a movie");
+        System.out.println(" ---- 3. Show the movie collection");
+        System.out.println(" ---- 4. Update a movie");
+        System.out.println(" ---- 5. Delete a movie");
+        System.out.println(" ---- 6. End the program");
+
+        userChoice = readIntWithValidation("Please select a menu option by entering the corresponding number \n", 1, 6);
+
+        //userChoice = input.nextInt();
 
         if (userChoice == 1){
-            addrandomMovies();
             OpretEnFilm();
             returMenue();
         } else if (userChoice == 2){
@@ -40,18 +44,21 @@ public class UserInterface {
         } else if (userChoice == 4){
             updateMovie();
             returMenue();
+        } else if (userChoice == 5) {
+            removeMovie();
+            returMenue();
         }
 
     }
     }
 
-    ///********** Helper metods and print out practical information  *******************************///
+    ///********** Helper methods and print out practical information  *******************************///
 
     // --- Helper method to get to start --- //
     public void returMenue() {
         boolean brugervalg = true;
         while (brugervalg) {
-            System.out.println("Do you want to return to main menue, type yes or false");
+            System.out.println("Do you want to return to main menu? type yes or false");
             brugervalg = input.next().equalsIgnoreCase("yes");{
                 brugervalg = false;
             }
@@ -69,17 +76,17 @@ public class UserInterface {
             String title = input.next();
             System.out.println("Please type in who directed it");
             String director = input.next();
-            System.out.println("year");
+            System.out.println("Please type in the year the movie was released");
             int year = input.nextInt();
             System.out.println("Are the movie in color (true) else (false)");
             boolean IsInColor = input.nextBoolean();
-            System.out.println("How long is the movie in min");
+            System.out.println("How long is the movie in minutes?");
             double LenghtinMin = input.nextDouble();
             System.out.println("what genre is it ?");
             String genre = input.next();
             film.tilFøjMovie(title, director, year, IsInColor, LenghtinMin, genre);
-            System.out.println("domain_model.Movie was added to libary");
-            System.out.println("want to add another type true, else false");
+            System.out.println("Movie was added to your libary");
+            System.out.println("If you want to add another type true, else false");
             boolean dummyVarUpdate = input.nextBoolean();
             dummyVar = dummyVarUpdate;
         }
@@ -94,9 +101,9 @@ public class UserInterface {
     ///********** Methods to handle movies ****************************************************///
 
     public void searchAmovie(){
-        System.out.println("please type it what movie you want to find");
+        System.out.println("Please type in what movie you want to find");
         String userInput = input.next();
-        film.searchMovieCollection(userInput);
+        System.out.println(film.searchMovieCollection(userInput));
 
     }
 
@@ -106,11 +113,17 @@ public class UserInterface {
     }
 
     public void updateMovie (){
-        System.out.println("to edit the sub categories type: 1.Director 2.Year 3.Is in color 4.Length in min 5. Genre");
+        System.out.println("to edit the sub categories type the corresponding number:" +
+                "\n 1.Director " +
+                "\n 2.Year " +
+                "\n 3.Is in color " +
+                "\n 4.Length in min " +
+                "\n 5. Genre");
+
         int attribute = input.nextInt();
         System.out.println("Please type in the name of the movie you want to edit");
         String movieEdit = input.next();
-        System.out.println("what do you want it to update to");
+        System.out.println("what do you want it to update to?");
         String updateValue = input.next();
         film.updateMovie(attribute, movieEdit, updateValue);
     }
@@ -118,4 +131,63 @@ public class UserInterface {
 
     //****************** testing ************************************* //
 
+    public void removeMovie() {
+        System.out.println(film.getMovietitles());
+        System.out.println("Please enter the title of the movie you want to remove");
+        String title = input.nextLine();
+        System.out.println(film.removeMovie(title));
+
+
+
+    }
+
+
+
+
+
+//Try catch metode til at fange InputMismatchException. Vi tilskriver den parameteren String prompt, så der kan udskrives en prompte string.
+    //Herefter deklarer vi en int 'userInput' og en boolean 'flagdown'.
+    //Samtidig bruger vi et while-loop med conditionen (!flagdown), så metoden bliver ved med genstarte indtil brugeren har indtastet en int værdi.
+    //Når der bliver givet en int, vil flagdown blive true, hvilket gør vi bryder ud af while loopet.
+    private int validateUserInput (String prompt) {
+        int userInput = 0;
+        boolean flagdown = false;
+
+        while (!flagdown) {
+            try {
+                System.out.print(prompt);
+                userInput = input.nextInt();
+                input.nextLine();
+                flagdown = true;
+
+            } catch (InputMismatchException ime){
+                System.out.println("Error! Please input a valid number!");
+                input.nextLine();
+
+            }
+        } return userInput;
+    }
+
+    private int readIntWithValidation (String prompt, int min, int max) {
+        int userInput = 0;
+        boolean flagdown = false;
+
+        while (!flagdown) {
+            try {
+                System.out.print(prompt);
+                userInput = input.nextInt();
+                input.nextLine();
+
+                if(userInput>= min && userInput <= max){
+                    flagdown = true;
+                } else {
+                    System.out.println("Error! Please input a number between " + min + " and " + max);
+                }
+
+            } catch (InputMismatchException ime){
+                System.out.println("Error! Please input a valid number!");
+                input.nextLine();
+            }
+        } return userInput;
+    }
 }
