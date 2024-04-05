@@ -38,23 +38,7 @@ public class MovieCollection {
     }
 
 
-//    //public String searchMovieCollection(String title) {
-//        String result = "";
-//        for (Movie movie : movieCollection) {
-//            if (movie.getTitle().toLowerCase().contains(title.toLowerCase())) {
-//                result += movie.toString() + "\n";
-//            } else {
-//                System.out.println("No movie by title " + title + " found.");
-//                break;
-//            }
-//        }
-//        if (!result.isEmpty()) {
-//            System.out.println(result);
-//        } else {
-//            System.out.println("You haven't added any movies to your collection");
-//        }
-//        return result;
-//    } // ---> bad design pattern system.out.printLN
+
 
     public String getMovietitles() {
         String list = "";
@@ -76,15 +60,6 @@ public class MovieCollection {
     }
 
 
-//    public String removeMovie(String MovieNameToRemove) {
-//        for (int i = 0; i <= movieCollection.size()-1; i++) {
-//            if ((movieCollection.get(i).getTitle()).equalsIgnoreCase(MovieNameToRemove)) {
-//                movieCollection.remove(i);
-//            } else {
-//                return "No movie by that title found";
-//            }
-//        } return "Movie has been deleted";
-//    }
 
 
     /// *********************** Movie collection update / delete movie **********************************////
