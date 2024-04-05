@@ -59,8 +59,9 @@ public class MovieCollection {
         } return "No movie by that title found";
     }
 
-
-
+    public ArrayList<Movie> getMovieCollection() {
+        return movieCollection;
+    }
 
     /// *********************** Movie collection update / delete movie **********************************////
 
