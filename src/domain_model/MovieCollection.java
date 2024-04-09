@@ -1,7 +1,5 @@
 package domain_model;
 
-import domain_model.Movie;
-
 import java.util.ArrayList;
 
 public class MovieCollection {
@@ -62,6 +60,7 @@ public class MovieCollection {
     public ArrayList<Movie> getMovieCollection() {
         return movieCollection;
     }
+
 
     /// *********************** Movie collection update / delete movie **********************************////
 
@@ -125,6 +124,23 @@ public class MovieCollection {
     }
 
     //****************** testing ************************************* //
+
+
+    //ignore this - i am testing CSV reading and validation - LMOD
+    public boolean areListEqual (String csvLine) {
+        String[] attributes = csvLine.split(",");
+        for (Movie movie : movieCollection) {
+            if (movie.getTitle().equals(attributes[0]) &&
+            movie.getDirector().equals((attributes[1])) &&
+            Integer.parseInt(attributes[2]) == movie.getYear() &&
+                    Boolean.parseBoolean(attributes[3]) == movie.getIsInColor() &&
+                            Double.parseDouble(attributes[4]) == movie.getLenghtinMin() &&
+                    movie.getGenre().equals(attributes[5])) {
+
+                return true;
+            }
+        } return false;
+    }
 
 
 }
