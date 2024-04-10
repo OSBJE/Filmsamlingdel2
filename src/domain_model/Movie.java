@@ -85,5 +85,12 @@ public class Movie {
                     "\n" + "genre: " + genre +"\n";
     }
 
+// -- Helper methods to save file -- //
+
+    public String saveFormat() {
+        return title + ";" + director + ";" + year + ";" + IsInColor + ";" + lenghtinMin + ";" + genre;
+    }
+
+
 
 }

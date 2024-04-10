@@ -9,6 +9,7 @@ public class MovieCollection {
     //****************** ATTRIBUTES **************************************************//
     private ArrayList<Movie> movieCollection;
 
+
     // ***************** Constructor *********************************************** ///
     public MovieCollection() {
         this.movieCollection = new ArrayList<>();
@@ -21,6 +22,17 @@ public class MovieCollection {
     public void tilFøjMovie(String title, String director, int year, boolean IsInColor, double lenghtinMin, String genre) {
         movieCollection.add(new Movie(title, director, year, IsInColor, lenghtinMin, genre));
 
+    }
+
+    public void setMovieCollection(ArrayList<Movie> movieCollection) {
+        this.movieCollection = movieCollection;
+    }
+
+
+    /// ************************* Getter methods **********************************////
+
+    public ArrayList<Movie> getMovieCollection() {
+        return movieCollection;
     }
 
 
@@ -36,9 +48,6 @@ public class MovieCollection {
             }
         } return result;
     }
-
-
-
 
     public String getMovietitles() {
         String list = "";
@@ -59,9 +68,6 @@ public class MovieCollection {
         } return "No movie by that title found";
     }
 
-    public ArrayList<Movie> getMovieCollection() {
-        return movieCollection;
-    }
 
     /// *********************** Movie collection update / delete movie **********************************////
 

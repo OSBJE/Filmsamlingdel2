@@ -14,6 +14,7 @@ public class UserInterface {
     ///********** Game master this keeps game in a loop and calls methods *************************///
 
     public void startMenue(){
+        loadMovies();
         int sentinal = 6;
         int userChoice = 0;
         //addrandomMovies();
@@ -31,25 +32,36 @@ public class UserInterface {
         userChoice = readIntWithValidation("Please select a menu option by entering the corresponding number \n", 1, 6);
 
         //userChoice = input.nextInt();
+            switch (userChoice){
+                case 1 -> {
+                    OpretEnFilm();
+                    returMenue();
+                }
+                case 2 -> {
+                    searchAmovie();
+                    returMenue();
+                }
+                case 3 -> {
+                    showMovieCollection();
+                    returMenue();
+                }
+                case 4 -> {
+                    updateMovie();
+                    returMenue();
+                }
+                case 5 -> {
+                    userInputUpdate();
+                    //removeMovie();
+                    returMenue();
+                }
+                case 6 -> {
+                    saveMovies();
+                }
+                default -> {
+                }
+            }
 
-        if (userChoice == 1){
-            OpretEnFilm();
-            returMenue();
-        } else if (userChoice == 2){
-            searchAmovie();
-            returMenue();
-        } else if (userChoice == 3){
-            showMovieCollection();
-            returMenue();
-        } else if (userChoice == 4){
-            updateMovie();
-            returMenue();
-        } else if (userChoice == 5) {
-            removeMovie();
-            returMenue();
         }
-
-    }
     }
 
     ///********** Helper methods and print out practical information  *******************************///
@@ -131,18 +143,27 @@ public class UserInterface {
 
     //****************** testing ************************************* //
 
+
+
     public void removeMovie() {
         System.out.println(film.getMovietitles());
         System.out.println("Please enter the title of the movie you want to remove");
         String title = input.nextLine();
         System.out.println(film.removeMovie(title));
 
-
-
     }
 
+    public void saveMovies () {
+        film.saveMovies();
+    }
 
+    public void loadMovies () {
+        film.loadMovice();
+    }
 
+    public void userInputUpdate () {
+        film.userInputSort();
+    }
 
 
 //Try catch metode til at fange InputMismatchException. Vi tilskriver den parameteren String prompt, så der kan udskrives en prompte string.
