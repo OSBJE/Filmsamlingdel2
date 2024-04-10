@@ -1,14 +1,12 @@
 package domain_model;
 
-import domain_model.Movie;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class MovieCollection {
 
     //****************** ATTRIBUTES **************************************************//
     private ArrayList<Movie> movieCollection;
-
 
     // ***************** Constructor *********************************************** ///
     public MovieCollection() {
@@ -24,15 +22,8 @@ public class MovieCollection {
 
     }
 
-    public void setMovieCollection(ArrayList<Movie> movieCollection) {
-        this.movieCollection = movieCollection;
-    }
-
-
-    /// ************************* Getter methods **********************************////
-
-    public ArrayList<Movie> getMovieCollection() {
-        return movieCollection;
+    public void setMovieCollection(ArrayList<Movie> loadedMovies) {
+        this.movieCollection = loadedMovies;
     }
 
 
@@ -48,6 +39,9 @@ public class MovieCollection {
             }
         } return result;
     }
+
+
+
 
     public String getMovietitles() {
         String list = "";
@@ -66,6 +60,10 @@ public class MovieCollection {
             }
 
         } return "No movie by that title found";
+    }
+
+    public ArrayList<Movie> getMovieCollection() {
+        return movieCollection;
     }
 
 
@@ -131,6 +129,25 @@ public class MovieCollection {
     }
 
     //****************** testing ************************************* //
+
+
+    //Method to compare ArrayLists utilizing our compareTo method in Movie class.
+    public boolean doesCollectionsDiffer (ArrayList<Movie> collection1, ArrayList<Movie> collection2) {
+        if (collection1.size() != collection2.size()) {
+            return true; //if the collections differ in size
+        }
+
+        //if the content differs, but the length is the same
+        for (int i = 0; i<collection1.size(); i++) {
+            Movie movie1 = collection1.get(i);
+            Movie movie2 = collection2.get(i);
+
+                if(movie1.compareTo(movie2) !=0) {
+                    return true;
+                }
+        }
+        return false; //if no changes are found
+    }
 
 
 }

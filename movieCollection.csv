@@ -1,8 +1,6 @@
-title;director;year;IsInColor;lenghtInMin;genre
-Another;test;1992;true;83.0;horror
-LastTry;COmeon;2024;true;130.0;horror
-Morten;Muhaha;9213;false;5.0;romance
-Same;same;2018;true;99.0;test
-Suffering;ReallySuffering;2024;true;900.0;udmattende
-hans;ham;1932;true;34.1;horror
-hehe;hihi;1999;true;11.0;argh
+
+hans,hansen,90,true,92.0,k
+kak,kak,90,true,92.0,k
+hans,hans,9,true,92.0,k
+hans,hansimand,9,true,92.0,k
+john,hansen,1999,true,92.0,k

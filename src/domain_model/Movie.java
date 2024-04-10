@@ -1,6 +1,8 @@
 package domain_model;
 
-public class Movie {
+import java.util.Comparator;
+
+public class Movie implements Comparable<Movie>{
 
     //****************** ATTRIBUTES **************************************************//
     private String title;
@@ -48,6 +50,8 @@ public class Movie {
         return genre;
     }
 
+
+
 /// ************************* Setter methods **********************************////
 
     public void setTitle(String setTitle) {
@@ -85,12 +89,23 @@ public class Movie {
                     "\n" + "genre: " + genre +"\n";
     }
 
-// -- Helper methods to save file -- //
-
+    // -- Helper methods to save file -- //
     public String saveFormat() {
-        return title + ";" + director + ";" + year + ";" + IsInColor + ";" + lenghtinMin + ";" + genre;
+        return title + "," + director + "," + year + "," + IsInColor + "," + lenghtinMin + "," + genre;
     }
 
+    // -- Compare methods -- //
 
+    @Override
 
+    //lav seperat comparator for hver attribut istedet
+    public int compareTo(Movie o) {
+        return Comparator.comparing(Movie::getTitle)
+                .thenComparing(Movie::getDirector)
+                .thenComparing(Movie::getYear)
+                .thenComparing(Movie::getIsInColor)
+                .thenComparing(Movie::getLenghtinMin)
+                .thenComparing(Movie::getGenre)
+                .compare(this,o);
+    }
 }

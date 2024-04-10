@@ -1,6 +1,7 @@
 package ui;
 import domain_model.*;
 
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,24 +15,24 @@ public class UserInterface {
     ///********** Game master this keeps game in a loop and calls methods *************************///
 
     public void startMenue(){
-        loadMovies();
+
+        film.loadMovieCollection(); //load the movies from the CSV-file on startup
+
+
         int sentinal = 6;
         int userChoice = 0;
         //addrandomMovies();
         while (userChoice != sentinal) {
+            System.out.println("Welcome to my movie collection!");
+            System.out.println(" ---- 1. Add a movie");
+            System.out.println(" ---- 2. Search for a movie");
+            System.out.println(" ---- 3. Show the movie collection");
+            System.out.println(" ---- 4. Update a movie");
+            System.out.println(" ---- 5. Delete a movie");
+            System.out.println(" ---- 6. Save movie collection and exit program");
 
-        System.out.println("Welcome to my movie collection!");
-
-        System.out.println(" ---- 1. Add a movie");
-        System.out.println(" ---- 2. Search for a movie");
-        System.out.println(" ---- 3. Show the movie collection");
-        System.out.println(" ---- 4. Update a movie");
-        System.out.println(" ---- 5. Delete a movie");
-        System.out.println(" ---- 6. End the program");
-
-        userChoice = readIntWithValidation("Please select a menu option by entering the corresponding number \n", 1, 6);
-
-        //userChoice = input.nextInt();
+            userChoice = readIntWithValidation("Please select a menu option by entering the corresponding number \n", 1, 6);
+            //userChoice = input.nextInt();
             switch (userChoice){
                 case 1 -> {
                     OpretEnFilm();
@@ -50,17 +51,17 @@ public class UserInterface {
                     returMenue();
                 }
                 case 5 -> {
-                    userInputUpdate();
-                    //removeMovie();
+                    removeMovie();
                     returMenue();
                 }
                 case 6 -> {
-                    saveMovies();
+                    film.saveMovieCollection(film.doesCollectionsDiffer()); //program saves movieCollection on exit
+                    System.out.println("Exiting....");
                 }
+
                 default -> {
                 }
             }
-
         }
     }
 
@@ -143,27 +144,18 @@ public class UserInterface {
 
     //****************** testing ************************************* //
 
-
-
     public void removeMovie() {
         System.out.println(film.getMovietitles());
         System.out.println("Please enter the title of the movie you want to remove");
         String title = input.nextLine();
         System.out.println(film.removeMovie(title));
 
+
+
     }
 
-    public void saveMovies () {
-        film.saveMovies();
-    }
 
-    public void loadMovies () {
-        film.loadMovice();
-    }
 
-    public void userInputUpdate () {
-        film.userInputSort();
-    }
 
 
 //Try catch metode til at fange InputMismatchException. Vi tilskriver den parameteren String prompt, så der kan udskrives en prompte string.

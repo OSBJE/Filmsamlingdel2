@@ -1,66 +1,65 @@
 package domain_model;
-import SortMethods.NameComparator;
+
 import data_source.Filehandler;
 
 import java.util.ArrayList;
 
+
 public class Controller {
 
-
-    //****************** ATTRIBUTES **************************************************//
-        private final MovieCollection movieCollection;
-        private final Filehandler fh;
-        private final NameComparator NC;
+    private MovieCollection movieCollection;
+    private Filehandler filehandler;
 
 
-    // ***************** Constructor *********************************************** ///
-        public Controller()  {
-            this.NC = new NameComparator();
-            this.movieCollection = new MovieCollection();
-            this.fh = new Filehandler(movieCollection);
-        }
+    public Controller()  {
+        this.movieCollection = new MovieCollection();
+        this.filehandler = new Filehandler();
+    }
 
-    /// ************************* create and modify movies **********************************////
-        public void tilFøjMovie(String title, String director, int year, boolean IsInColor, double lenghtinMin, String genre) {
-            movieCollection.tilFøjMovie(title, director, year, IsInColor, lenghtinMin, genre);
-        }
+    public void tilFøjMovie(String title, String director, int year, boolean IsInColor, double lenghtinMin, String genre) {
+        movieCollection.tilFøjMovie(title, director, year, IsInColor, lenghtinMin, genre);
+    }
 
-        public String removeMovie(String MovieNameToRemove){
+    public String searchMovieCollection(String title){
+        return movieCollection.searchMovieCollection(title);
+    }
+
+    public String getMovietitles (){
+        return movieCollection.getMovietitles();
+    }
+
+    public String removeMovie(String MovieNameToRemove){
         return movieCollection.removeMovie(MovieNameToRemove);
-        }
+    }
 
-        public void updateMovie(int attributeToUpdate, String movieEdit, String valueToUpdate) {
+    public void updateMovie(int attributeToUpdate, String movieEdit, String valueToUpdate) {
         movieCollection.attributeToUpdate(attributeToUpdate, movieEdit, valueToUpdate);
     }
 
-    /// ************************* Search and get information **********************************////
-        public String searchMovieCollection(String title){
-            return movieCollection.searchMovieCollection(title);
-        }
-
-        public String getMovietitles (){
-            return movieCollection.getMovietitles();
-        }
-
-    /// ************************* File handling and save function **********************************////
-
-
-
-
-        //****************** testing ************************************* //
-
-    public void loadMovice (){
-            movieCollection.setMovieCollection(fh.loadAllMovies());
-    }
-
-    public void saveMovies (){
-        fh.saveMovieCollection();
+    public ArrayList<Movie> getMovieCollection (){
+       return movieCollection.getMovieCollection();
     }
 
 
-    public void userInputSort () {
-            NC.userInputSort(movieCollection.getMovieCollection());
+
+    //****************** testing ************************************* //
+
+    public void saveMovieCollection (boolean isChanged) {
+        filehandler.saveMovieCollection(movieCollection, isChanged);
     }
+
+    public ArrayList<Movie> readCsvFile()  {
+        return filehandler.readCsvFile();
+    }
+
+    public void loadMovieCollection() {
+        filehandler.loadMovieCollection(movieCollection);
+    }
+
+    public boolean doesCollectionsDiffer() {
+        return movieCollection.doesCollectionsDiffer(getMovieCollection(), readCsvFile());
+    }
+
 
 }
 
