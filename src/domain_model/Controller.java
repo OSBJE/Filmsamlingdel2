@@ -2,6 +2,8 @@ package domain_model;
 
 import data_source.Filehandler;
 
+import java.util.ArrayList;
+
 
 public class Controller {
 
@@ -34,17 +36,30 @@ public class Controller {
         movieCollection.attributeToUpdate(attributeToUpdate, movieEdit, valueToUpdate);
     }
 
+    public ArrayList<Movie> getMovieCollection (){
+       return movieCollection.getMovieCollection();
+    }
+
 
 
     //****************** testing ************************************* //
 
-    public void saveMovieCollection () {
-        filehandler.saveMovieCollection(movieCollection);
+    public void saveMovieCollection (boolean isChanged) {
+        filehandler.saveMovieCollection(movieCollection, isChanged);
     }
 
-    public void loadMovieCollection()  {
+    public ArrayList<Movie> readCsvFile()  {
+        return filehandler.readCsvFile();
+    }
+
+    public void loadMovieCollection() {
         filehandler.loadMovieCollection(movieCollection);
     }
+
+    public boolean doesCollectionsDiffer() {
+        return movieCollection.doesCollectionsDiffer(getMovieCollection(), readCsvFile());
+    }
+
 
 }
 

@@ -1,6 +1,7 @@
 package domain_model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MovieCollection {
 
@@ -19,6 +20,10 @@ public class MovieCollection {
     public void tilFøjMovie(String title, String director, int year, boolean IsInColor, double lenghtinMin, String genre) {
         movieCollection.add(new Movie(title, director, year, IsInColor, lenghtinMin, genre));
 
+    }
+
+    public void setMovieCollection(ArrayList<Movie> loadedMovies) {
+        this.movieCollection = loadedMovies;
     }
 
 
@@ -126,20 +131,22 @@ public class MovieCollection {
     //****************** testing ************************************* //
 
 
-    //ignore this - i am testing CSV reading and validation - LMOD
-    public boolean areListEqual (String csvLine) {
-        String[] attributes = csvLine.split(",");
-        for (Movie movie : movieCollection) {
-            if (movie.getTitle().equals(attributes[0]) &&
-            movie.getDirector().equals((attributes[1])) &&
-            Integer.parseInt(attributes[2]) == movie.getYear() &&
-                    Boolean.parseBoolean(attributes[3]) == movie.getIsInColor() &&
-                            Double.parseDouble(attributes[4]) == movie.getLenghtinMin() &&
-                    movie.getGenre().equals(attributes[5])) {
+    //Method to compare ArrayLists utilizing our compareTo method in Movie class.
+    public boolean doesCollectionsDiffer (ArrayList<Movie> collection1, ArrayList<Movie> collection2) {
+        if (collection1.size() != collection2.size()) {
+            return true; //if the collections differ in size
+        }
 
-                return true;
-            }
-        } return false;
+        //if the content differs, but the length is the same
+        for (int i = 0; i<collection1.size(); i++) {
+            Movie movie1 = collection1.get(i);
+            Movie movie2 = collection2.get(i);
+
+                if(movie1.compareTo(movie2) !=0) {
+                    return true;
+                }
+        }
+        return false; //if no changes are found
     }
 
 

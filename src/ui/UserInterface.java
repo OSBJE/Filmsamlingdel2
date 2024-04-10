@@ -16,7 +16,10 @@ public class UserInterface {
 
     public void startMenue(){
 
-        int sentinal = 8;
+        film.loadMovieCollection(); //load the movies from the CSV-file on startup
+
+
+        int sentinal = 6;
         int userChoice = 0;
         //addrandomMovies();
         while (userChoice != sentinal) {
@@ -26,11 +29,9 @@ public class UserInterface {
             System.out.println(" ---- 3. Show the movie collection");
             System.out.println(" ---- 4. Update a movie");
             System.out.println(" ---- 5. Delete a movie");
-            System.out.println(" ---- 6. Save movie collection to file");
-            System.out.println(" ---- 7. Load movie collection from file");
-            System.out.println(" ---- 8. Exit program");
+            System.out.println(" ---- 6. Save movie collection and exit program");
 
-            userChoice = readIntWithValidation("Please select a menu option by entering the corresponding number \n", 1, 8);
+            userChoice = readIntWithValidation("Please select a menu option by entering the corresponding number \n", 1, 6);
             //userChoice = input.nextInt();
             switch (userChoice){
                 case 1 -> {
@@ -54,14 +55,10 @@ public class UserInterface {
                     returMenue();
                 }
                 case 6 -> {
-                    film.saveMovieCollection();
-                }
-                case 7 -> {
-                    film.loadMovieCollection();
-                }
-                case 8 -> {
+                    film.saveMovieCollection(film.doesCollectionsDiffer()); //program saves movieCollection on exit
                     System.out.println("Exiting....");
                 }
+
                 default -> {
                 }
             }

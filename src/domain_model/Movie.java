@@ -97,6 +97,8 @@ public class Movie implements Comparable<Movie>{
     // -- Compare methods -- //
 
     @Override
+
+    //lav seperat comparator for hver attribut istedet
     public int compareTo(Movie o) {
         return Comparator.comparing(Movie::getTitle)
                 .thenComparing(Movie::getDirector)
