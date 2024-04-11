@@ -122,7 +122,7 @@ public class MovieCollection {
 
     public void movieValueUpdate(String movieEdit, double updateValue) { // LenghtInMin
         Movie object = movieCollection.get(movieToUpdate(movieEdit));
-        object.setLenghtinMin(updateValue);
+        object.setLengthinMin(updateValue);
     }
 
     public void movieValueGenre(String movieEdit, String updateValue) { // Genre

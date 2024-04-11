@@ -60,7 +60,9 @@ public class UserInterface {
                     System.out.println("Exiting....");
                 }
                 case 7 -> {
-                    sortMovieCollection();
+                    System.out.println("What attribute do you want to sort for? ( Title / Director / Year / Lengthinmin / Genre )");
+                    String userInput = input.nextLine();
+                    sortMovieCollection(userInput);
                 }
 
                 default -> {
@@ -156,8 +158,39 @@ public class UserInterface {
     }
 
 
-    public void sortMovieCollection(){
-        film.sortComparator(film.getMovieCollection(), "lenghtinMin");
+    public void sortMovieCollection(String input){
+
+        switch (input.toLowerCase()) {
+            case "title", "t", "tit":
+                input = "title";
+                film.sortComparator(film.getMovieCollection(), input);
+                break;
+
+            case "director", "dir", "d":
+                input = "director";
+                film.sortComparator(film.getMovieCollection(), input);
+                break;
+
+            case "year", "y", "ye":
+                input = "year";
+                film.sortComparator(film.getMovieCollection(), input);
+                break;
+
+            case "length in minutes", "length", "l", "lengthinmin":
+                input = "lengthinmin";
+                film.sortComparator(film.getMovieCollection(), input);
+                break;
+
+            case "genre", "g", "gen":
+                input = "genre";
+                film.sortComparator(film.getMovieCollection(), input);
+                break;
+
+            default:
+                System.out.println("Invalid input - please try again");
+
+        }
+
         System.out.println("I am jumping into sortMovieCollection");
 
     }

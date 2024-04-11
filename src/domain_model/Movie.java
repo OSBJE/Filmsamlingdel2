@@ -9,18 +9,18 @@ public class Movie implements Comparable<Movie>{
     private String director;
     private int year;
     private boolean IsInColor;
-    private double lenghtinMin;
+    private double lengthinMin;
     private String genre;
 
 
 
     // ***************** Constructor *********************************************** ///
-    public Movie(String title, String director, int year, boolean IsInColor, double lenghtinMin, String genre) {
+    public Movie(String title, String director, int year, boolean IsInColor, double lengthinMin, String genre) {
         this.title = title;
         this.director = director;
         this.year = year;
         this.IsInColor = IsInColor;
-        this.lenghtinMin = lenghtinMin;
+        this.lengthinMin = lengthinMin;
         this.genre = genre;
     }
 
@@ -42,8 +42,8 @@ public class Movie implements Comparable<Movie>{
         return IsInColor;
     }
 
-    public double getLenghtinMin() {
-        return lenghtinMin;
+    public double getLengthinMin() {
+        return lengthinMin;
     }
 
     public String getGenre() {
@@ -70,8 +70,8 @@ public class Movie implements Comparable<Movie>{
         this.IsInColor = setIsInColor;
     }
 
-    public void setLenghtinMin(double setLenghtinMin) {
-        this.lenghtinMin = setLenghtinMin;
+    public void setLengthinMin(double setLenghtinMin) {
+        this.lengthinMin = setLenghtinMin;
     }
 
     public void setGenre(String setGenre) {
@@ -85,13 +85,13 @@ public class Movie implements Comparable<Movie>{
                     "\n" + "Director: " + director +
                     "\n" + "year: " + year +
                     "\n" + "IsInColor: " + (IsInColor ? "Yes" : "No") +  //ternary operator til if-else statement.
-                    "\n" + "lenghtinMin: " + lenghtinMin +
+                    "\n" + "lenghtinMin: " + lengthinMin +
                     "\n" + "genre: " + genre +"\n";
     }
 
     // -- Helper methods to save file -- //
     public String saveFormat() {
-        return title + "," + director + "," + year + "," + IsInColor + "," + lenghtinMin + "," + genre;
+        return title + "," + director + "," + year + "," + IsInColor + "," + lengthinMin + "," + genre;
     }
 
     // -- Compare methods -- //
@@ -104,7 +104,7 @@ public class Movie implements Comparable<Movie>{
                 .thenComparing(Movie::getDirector)
                 .thenComparing(Movie::getYear)
                 .thenComparing(Movie::getIsInColor)
-                .thenComparing(Movie::getLenghtinMin)
+                .thenComparing(Movie::getLengthinMin)
                 .thenComparing(Movie::getGenre)
                 .compare(this,o);
     }
