@@ -15,7 +15,7 @@ public enum ParameterComparator {
         int resullts = o1.getYear() - o2.getYear();
         return resullts;
     }),
-    LENGHTINMIN(Comparator.comparingDouble(Movie::getLenghtinMin)),
+    LENGTHINMIN(Comparator.comparingDouble(Movie::getLengthinMin)),
     GENRE((o1, o2) -> {
         int results = o1.getGenre().compareTo(o2.getGenre());
         return results;
