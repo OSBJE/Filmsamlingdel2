@@ -4,10 +4,7 @@ import domain_model.MovieCollection;
 import interface_classes.fileHandlerInteface;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -135,7 +132,7 @@ class MovieCollectionTest implements fileHandlerInteface{
 
 
         //Act
-        saveMovieCollection(movieCollection, true);
+        saveMovieCollection(movieCollection, isChanged);
         ArrayList<Movie> actualMovieCollection = movieCollection.getMovieCollection();
         ArrayList<Movie> loadedMovieCollection = readCsvFile();
 
@@ -152,6 +149,7 @@ class MovieCollectionTest implements fileHandlerInteface{
             //check for the contents of the 2 arraylist utilising the compareTo method in Movie class.
             // The '0' is the expected result, as the compareTo method in Movie will return 0 if the contents is the same
         }
+        file.delete(); //remove the file after testing
 
 
     }
