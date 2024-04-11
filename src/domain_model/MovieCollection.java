@@ -170,5 +170,29 @@ public class MovieCollection {
             System.out.println("I am sorting on the selected Comparator");
         }
     }
+
+
+    // Sort on user attribute
+    public void sortMultipleInput (ArrayList<Movie> movie, String input) {
+        System.out.println("I am jumping into MovieCollection sort method");
+
+        ParameterComparator selected = null;
+
+        for (ParameterComparator name : ParameterComparator.values()) {
+            if (input.equalsIgnoreCase(name.name())) {
+                selected = name;
+                System.out.println("I am selecting a Comparator");
+            }
+        }
+
+        if (selected != null) {
+            Comparator<Movie> movieComparator = selected.getComparator();
+            Collections.sort(movie, movieComparator.thenComparing(movieComparator));
+
+
+            //Collections.sort(Comparator.comparing(movie:: movieComparator).thenComparing(movie:: );
+            System.out.println("I am sorting on the selected Comparator");
+        }
+    }
 }
 
