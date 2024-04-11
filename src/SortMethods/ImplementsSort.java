@@ -6,13 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/*
 public abstract class ImplementsSort {
-    //Empty class for structore porpuse
+    //Empty class for structor porpuse
 
     }
 
 
-abstract class title implements SortInterface{
+class title extends SortInterface{
 
     @Override
     public void sort(ArrayList<Movie> movie) {
@@ -25,7 +26,7 @@ abstract class title implements SortInterface{
     }
 }
 
-abstract class director implements SortInterface{
+class director extends SortInterface{
 
     @Override
     public void sort(ArrayList<Movie> movie) {
@@ -38,7 +39,7 @@ abstract class director implements SortInterface{
     }
 }
 
-abstract class lenghtinmin implements SortInterface{
+class year extends SortInterface{
 
     @Override
     public void sort(ArrayList<Movie> movie) {
@@ -51,7 +52,20 @@ abstract class lenghtinmin implements SortInterface{
     }
 }
 
-abstract class genre implements SortInterface{
+class lenghtinmin extends SortInterface{
+
+    @Override
+    public void sort(ArrayList<Movie> movie) {
+        Collections.sort(movie, new Comparator<Movie>() {
+            public int compare(Movie o1, Movie o2) {
+                double results = (o1.getLenghtinMin() - o2.getLenghtinMin());
+                return (int) results;
+            }
+        });
+    }
+}
+
+class genre extends SortInterface{
 
     @Override
     public void sort(ArrayList<Movie> movie) {
@@ -62,12 +76,13 @@ abstract class genre implements SortInterface{
             }
         });
     }
-}
+
+ */
+
+
+
 
 /*
-
-
-
     public void userInputSort (ArrayList<Movie> list) { // String attribute
         final String attribute = "getDirector"; // for example. Also, this is case-sesitive
         Collections.sort(list, new Comparator<Movie>() {

@@ -1,7 +1,9 @@
 package domain_model;
 
+import SortMethods.ParameterComparator;
 import data_source.Filehandler;
 
+import javax.naming.ldap.SortControl;
 import java.util.ArrayList;
 
 
@@ -9,6 +11,7 @@ public class Controller {
 
     private MovieCollection movieCollection;
     private Filehandler filehandler;
+
 
 
     public Controller()  {
@@ -60,7 +63,10 @@ public class Controller {
         return movieCollection.doesCollectionsDiffer(getMovieCollection(), readCsvFile());
     }
 
-
+    public void sortComparator(ArrayList<Movie> movie, String title) {
+        movieCollection.sortComparator(movie, title);
+        System.out.println("I am jumping into the controller");
+    }
 }
 
 

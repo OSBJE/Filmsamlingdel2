@@ -1,4 +1,5 @@
 package ui;
+import SortMethods.ParameterComparator;
 import domain_model.*;
 
 
@@ -19,7 +20,7 @@ public class UserInterface {
         film.loadMovieCollection(); //load the movies from the CSV-file on startup
 
 
-        int sentinal = 6;
+        int sentinal = 8;
         int userChoice = 0;
         //addrandomMovies();
         while (userChoice != sentinal) {
@@ -31,7 +32,7 @@ public class UserInterface {
             System.out.println(" ---- 5. Delete a movie");
             System.out.println(" ---- 6. Save movie collection and exit program");
 
-            userChoice = readIntWithValidation("Please select a menu option by entering the corresponding number \n", 1, 6);
+            userChoice = readIntWithValidation("Please select a menu option by entering the corresponding number \n", 1, 7);
             //userChoice = input.nextInt();
             switch (userChoice){
                 case 1 -> {
@@ -57,6 +58,9 @@ public class UserInterface {
                 case 6 -> {
                     film.saveMovieCollection(film.doesCollectionsDiffer()); //program saves movieCollection on exit
                     System.out.println("Exiting....");
+                }
+                case 7 -> {
+                    sortMovieCollection();
                 }
 
                 default -> {
@@ -149,11 +153,14 @@ public class UserInterface {
         System.out.println("Please enter the title of the movie you want to remove");
         String title = input.nextLine();
         System.out.println(film.removeMovie(title));
-
-
-
     }
 
+
+    public void sortMovieCollection(){
+        film.sortComparator(film.getMovieCollection(), "lenghtinMin");
+        System.out.println("I am jumping into sortMovieCollection");
+
+    }
 
 
 
@@ -203,4 +210,5 @@ public class UserInterface {
             }
         } return userInput;
     }
+
 }

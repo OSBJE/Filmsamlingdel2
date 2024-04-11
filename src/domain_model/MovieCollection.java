@@ -1,6 +1,10 @@
 package domain_model;
 
+import SortMethods.ParameterComparator;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MovieCollection {
@@ -39,8 +43,6 @@ public class MovieCollection {
             }
         } return result;
     }
-
-
 
 
     public String getMovietitles() {
@@ -149,6 +151,24 @@ public class MovieCollection {
         return false; //if no changes are found
     }
 
+    // Sort on user attribute
+    public void sortComparator (ArrayList<Movie> movie, String input) {
+        System.out.println("I am jumping into MovieCollection sort method");
 
+        ParameterComparator selected = null;
+
+        for (ParameterComparator name : ParameterComparator.values()) {
+            if (input.equalsIgnoreCase(name.name())) {
+                selected = name;
+                System.out.println("I am selecting a Comparator");
+            }
+        }
+
+        if (selected != null) {
+            Comparator<Movie> movieComparator = selected.getComparator();
+            Collections.sort(movie, movieComparator);
+            System.out.println("I am sorting on the selected Comparator");
+        }
+    }
 }
 
