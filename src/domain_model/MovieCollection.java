@@ -17,7 +17,6 @@ public class MovieCollection {
         this.movieCollection = new ArrayList<>();
     }
 
-
     /// ************************* Setter methods **********************************////
 
     // --- Helper method new object --- //
@@ -44,7 +43,6 @@ public class MovieCollection {
         } return result;
     }
 
-
     public String getMovietitles() {
         String list = "";
         for (int i = 0; i <= movieCollection.size()-1 ; i++) {
@@ -68,6 +66,26 @@ public class MovieCollection {
         return movieCollection;
     }
 
+
+    /// ****************************** Sorting methods to MovieCollections ******************************///
+
+
+    // Sort on user attribute
+    public void sortComparator (ArrayList<Movie> movie, String input) {
+
+        ParameterComparator selected = null;
+
+        for (ParameterComparator name : ParameterComparator.values()) {
+            if (input.equalsIgnoreCase(name.name())) {
+                selected = name;
+            }
+        }
+
+        if (selected != null) {
+            Comparator<Movie> movieComparator = selected.getComparator();
+            Collections.sort(movie, movieComparator);
+        }
+    }
 
     /// *********************** Movie collection update / delete movie **********************************////
 
@@ -130,8 +148,9 @@ public class MovieCollection {
         object.setGenre(updateValue);
     }
 
-    //****************** testing ************************************* //
 
+
+    //******************** Saving methods and checks ******************//
 
     //Method to compare ArrayLists utilizing our compareTo method in Movie class.
     public boolean doesCollectionsDiffer (ArrayList<Movie> collection1, ArrayList<Movie> collection2) {
@@ -144,55 +163,39 @@ public class MovieCollection {
             Movie movie1 = collection1.get(i);
             Movie movie2 = collection2.get(i);
 
-                if(movie1.compareTo(movie2) !=0) {
-                    return true;
-                }
+            if(movie1.compareTo(movie2) !=0) {
+                return true;
+            }
         }
         return false; //if no changes are found
     }
 
-    // Sort on user attribute
-    public void sortComparator (ArrayList<Movie> movie, String input) {
-        System.out.println("I am jumping into MovieCollection sort method");
 
+
+    //****************** testing ************************************* //
+
+    // ******** Sort function on multiple attributes using userinptu ********* //
+    public void sortMultipleInput (ArrayList<Movie> movie, String input1, String input2) {
+
+        Comparator<Movie> attribute1 = getComparatorMethod(input1).getComparator();
+        Comparator<Movie> attribute2 = getComparatorMethod(input2).getComparator();
+
+        Collections.sort(movie, attribute1.thenComparing(attribute2));
+
+    }
+
+    //*** Helper method to getComparator
+    public ParameterComparator getComparatorMethod (String input) {
         ParameterComparator selected = null;
 
         for (ParameterComparator name : ParameterComparator.values()) {
             if (input.equalsIgnoreCase(name.name())) {
                 selected = name;
-                System.out.println("I am selecting a Comparator");
             }
         }
-
-        if (selected != null) {
-            Comparator<Movie> movieComparator = selected.getComparator();
-            Collections.sort(movie, movieComparator);
-            System.out.println("I am sorting on the selected Comparator");
-        }
+        return selected;
     }
 
 
-    // Sort on user attribute
-    public void sortMultipleInput (ArrayList<Movie> movie, String input) {
-        System.out.println("I am jumping into MovieCollection sort method");
-
-        ParameterComparator selected = null;
-
-        for (ParameterComparator name : ParameterComparator.values()) {
-            if (input.equalsIgnoreCase(name.name())) {
-                selected = name;
-                System.out.println("I am selecting a Comparator");
-            }
-        }
-
-        if (selected != null) {
-            Comparator<Movie> movieComparator = selected.getComparator();
-            Collections.sort(movie, movieComparator.thenComparing(movieComparator));
-
-
-            //Collections.sort(Comparator.comparing(movie:: movieComparator).thenComparing(movie:: );
-            System.out.println("I am sorting on the selected Comparator");
-        }
-    }
 }
 

@@ -18,11 +18,12 @@ public class UserInterface {
     public void startMenue(){
 
         film.loadMovieCollection(); //load the movies from the CSV-file on startup
+        film.sortComparator(film.getMovieCollection(), "title"); // Sorter dem efter title
 
 
-        int sentinal = 8;
+        int sentinal = 7;
         int userChoice = 0;
-        //addrandomMovies();
+
         while (userChoice != sentinal) {
             System.out.println("Welcome to my movie collection!");
             System.out.println(" ---- 1. Add a movie");
@@ -30,7 +31,8 @@ public class UserInterface {
             System.out.println(" ---- 3. Show the movie collection");
             System.out.println(" ---- 4. Update a movie");
             System.out.println(" ---- 5. Delete a movie");
-            System.out.println(" ---- 6. Save movie collection and exit program");
+            System.out.println(" ---- 6. Sort movie collection");
+            System.out.println(" ---- 7. Save movie collection and exit program");
 
             userChoice = readIntWithValidation("Please select a menu option by entering the corresponding number \n", 1, 7);
             //userChoice = input.nextInt();
@@ -56,13 +58,12 @@ public class UserInterface {
                     returMenue();
                 }
                 case 6 -> {
-                    film.saveMovieCollection(film.doesCollectionsDiffer()); //program saves movieCollection on exit
-                    System.out.println("Exiting....");
+                    selectSortMethod();
+                    returMenue();
                 }
                 case 7 -> {
-                    System.out.println("What attribute do you want to sort for? ( Title / Director / Year / Lengthinmin / Genre )");
-                    String userInput = input.nextLine();
-                    sortMovieCollection(userInput);
+                    film.saveMovieCollection(film.doesCollectionsDiffer()); //program saves movieCollection on exit
+                    System.out.println("Exiting....");
                 }
 
                 default -> {
@@ -111,12 +112,6 @@ public class UserInterface {
         }
     }
 
-    public void addrandomMovies(){
-        film.tilFøjMovie("DieHard","Lord Hard",2004, true, 20, "Action");
-        film.tilFøjMovie("Lovepotion","Jacob Clienton",1992, false, 32, "Drama");
-        film.tilFøjMovie("Kitler","Hitler",1992, false, 32, "Drama");
-    }
-
     ///********** Methods to handle movies ****************************************************///
 
     public void searchAmovie(){
@@ -147,9 +142,6 @@ public class UserInterface {
         film.updateMovie(attribute, movieEdit, updateValue);
     }
 
-
-    //****************** testing ************************************* //
-
     public void removeMovie() {
         System.out.println(film.getMovietitles());
         System.out.println("Please enter the title of the movie you want to remove");
@@ -157,69 +149,74 @@ public class UserInterface {
         System.out.println(film.removeMovie(title));
     }
 
+    /// *** Sorting methods *** ///
+    public void sortMovieCollection() {
 
-    public void sortMovieCollection(String input){
+        String inputting = sortMovieCollectionhelper();
 
-        switch (input.toLowerCase()) {
+        film.sortComparator(film.getMovieCollection(), inputting);
+
+    }
+
+    public void sortOnMultipleInput(){
+        System.out.println("Please choose which two inputs you want to sort your movieCollection on");
+        String userInput1 = sortMovieCollectionhelper();
+
+        System.out.println("Great next attribute");
+        String userInput2 = sortMovieCollectionhelper();
+
+        film.sortMultipleAttributes(film.getMovieCollection(),userInput1,userInput2);
+    }
+
+    // *** Helper method to sortMovieCollection *** //
+    public String sortMovieCollectionhelper(){
+
+        System.out.println("What attribute do you want to sort for? ( Title / Director / Year / Lengthinmin / Genre )");
+        String userInput = input.nextLine();
+
+        String userInputadj = "";
+
+        switch (userInput.toLowerCase()) {
             case "title", "t", "tit":
-                input = "title";
-                film.sortComparator(film.getMovieCollection(), input);
+                userInputadj = "title";
                 break;
-
             case "director", "dir", "d":
-                input = "director";
-                film.sortComparator(film.getMovieCollection(), input);
+                userInputadj = "director";
                 break;
-
             case "year", "y", "ye":
-                input = "year";
-                film.sortComparator(film.getMovieCollection(), input);
+                userInputadj = "year";
                 break;
-
             case "length in minutes", "length", "l", "lengthinmin":
-                input = "lengthinmin";
-                film.sortComparator(film.getMovieCollection(), input);
+                userInputadj = "lengthinmin";
                 break;
-
             case "genre", "g", "gen":
-                input = "genre";
-                film.sortComparator(film.getMovieCollection(), input);
+                userInputadj = "genre";
                 break;
-
             default:
                 System.out.println("Invalid input - please try again");
 
         }
 
-        System.out.println("I am jumping into sortMovieCollection");
+        return userInputadj;
 
     }
 
+    // *** Helper to choose which sorting method *** //
+    public void selectSortMethod () {
+        System.out.println("Please type 1 for sorting on 1 type and 2 for sorting of 2 types (doh)");
+        int userInput = input.nextInt();
+        input.nextLine();
 
-
-
-//Try catch metode til at fange InputMismatchException. Vi tilskriver den parameteren String prompt, så der kan udskrives en prompte string.
-    //Herefter deklarer vi en int 'userInput' og en boolean 'flagdown'.
-    //Samtidig bruger vi et while-loop med conditionen (!flagdown), så metoden bliver ved med genstarte indtil brugeren har indtastet en int værdi.
-    //Når der bliver givet en int, vil flagdown blive true, hvilket gør vi bryder ud af while loopet.
-    private int validateUserInput (String prompt) {
-        int userInput = 0;
-        boolean flagdown = false;
-
-        while (!flagdown) {
-            try {
-                System.out.print(prompt);
-                userInput = input.nextInt();
-                input.nextLine();
-                flagdown = true;
-
-            } catch (InputMismatchException ime){
-                System.out.println("Error! Please input a valid number!");
-                input.nextLine();
-
-            }
-        } return userInput;
+        switch (userInput) {
+            case 1 -> sortMovieCollection();
+            case 2 -> sortOnMultipleInput();
+            default -> System.out.println("Invalid input - please try again");
+        }
     }
+
+
+    ///********************* Error handling methods ********************************************///
+
 
     private int readIntWithValidation (String prompt, int min, int max) {
         int userInput = 0;
@@ -243,5 +240,32 @@ public class UserInterface {
             }
         } return userInput;
     }
+
+    private int validateUserInput (String prompt) {
+        int userInput = 0;
+        boolean flagdown = false;
+
+        while (!flagdown) {
+            try {
+                System.out.print(prompt);
+                userInput = input.nextInt();
+                input.nextLine();
+                flagdown = true;
+
+            } catch (InputMismatchException ime){
+                System.out.println("Error! Please input a valid number!");
+                input.nextLine();
+
+            }
+        } return userInput;
+
+        //Try catch metode til at fange InputMismatchException. Vi tilskriver den parameteren String prompt, så der kan udskrives en prompte string.
+        //Herefter deklarer vi en int 'userInput' og en boolean 'flagdown'.
+        //Samtidig bruger vi et while-loop med conditionen (!flagdown), så metoden bliver ved med genstarte indtil brugeren har indtastet en int værdi.
+        //Når der bliver givet en int, vil flagdown blive true, hvilket gør vi bryder ud af while loopet.
+
+    }
+
+    //****************** testing ************************************* //
 
 }

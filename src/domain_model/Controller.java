@@ -65,7 +65,10 @@ public class Controller {
 
     public void sortComparator(ArrayList<Movie> movie, String title) {
         movieCollection.sortComparator(movie, title);
-        System.out.println("I am jumping into the controller");
+    }
+
+    public void sortMultipleAttributes(ArrayList<Movie> movie, String input1, String input2){
+        movieCollection.sortMultipleInput(movie, input1, input2);
     }
 }
 

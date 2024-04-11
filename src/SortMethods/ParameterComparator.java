@@ -29,6 +29,8 @@ public enum ParameterComparator {
         this.comp = comp;
     }
 
+
+    //*** Getter method to get your Comparator ***//
     public Comparator<Movie> getComparator() {
         return comp;
     }
