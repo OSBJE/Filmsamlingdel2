@@ -1,5 +1,7 @@
 package data_source;
 import domain_model.*;
+import interface_classes.fileHandlerInteface;
+
 import java.io.File;
 
 import java.io.IOException;
@@ -10,7 +12,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 
-public class Filehandler {
+public class Filehandler implements fileHandlerInteface{
     String filePath = "movieCollection.csv";
     Scanner sc;
 
@@ -20,12 +22,14 @@ public class Filehandler {
     }
 
     //Loader method that puts the content from the readCsvFile method into the movieCollection ArrayList. This happens in the controller.
+    @Override
         public void loadMovieCollection(MovieCollection collection) {
         collection.getMovieCollection().addAll(readCsvFile());
         }
 
 
         //refactor til at save automatisk ved exit
+    @Override
         public void saveMovieCollection(MovieCollection collection, boolean isChanged) {
             if (!isChanged) {
                 System.out.println("No changes made - not saving"); //Only here to give feedback if the program saves or not - will be refactored to return a string later
@@ -48,6 +52,7 @@ public class Filehandler {
 
         // *** Helper method *** //
         //Helper method to read the CSV file and put the objects in an ArrayList with movie objects
+    @Override
         public ArrayList<Movie> readCsvFile() {
             ArrayList<Movie> loadedMovie = new ArrayList<>();
             sc = null;

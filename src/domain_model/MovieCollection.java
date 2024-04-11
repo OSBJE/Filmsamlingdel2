@@ -60,7 +60,6 @@ public class MovieCollection {
                 movieCollection.remove(movie);
                 return movie.getTitle() + " has been removed";
             }
-
         } return "No movie by that title found";
     }
 
